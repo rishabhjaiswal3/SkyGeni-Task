@@ -11,16 +11,18 @@ export const getData = () => {
   ];
 
   const grouped = {};
-
+  
   for (const item of originalData) {
     const { Cust_Type, closed_fiscal_quarter, acv, count } = item;
 
     if (!grouped[Cust_Type]) {
-      grouped[Cust_Type] = {};
+      grouped[Cust_Type] = {
+
+      };
     }
 
     if (!grouped[Cust_Type][closed_fiscal_quarter]) {
-      grouped[Cust_Type][closed_fiscal_quarter] = { acv: 0, count: 0 };
+      grouped[Cust_Type][closed_fiscal_quarter] = { acv: 0, count: 0, };
     }
 
     grouped[Cust_Type][closed_fiscal_quarter].acv += acv;
@@ -28,24 +30,42 @@ export const getData = () => {
   }
 
   const result = [];
-
+  let finalACV = 0;
   for (const [custType, data] of Object.entries(grouped)) {
     const acvs = [];
     const quarters = [];
     const counts = [];
+    let totalCount = 0;
+    let totalAcv = 0;
 
     for (const [quarter, { acv, count }] of Object.entries(data)) {
       quarters.push(quarter);
       acvs.push(acv);
       counts.push(count);
+      totalCount +=  count;
+      totalAcv += acv;
     }
+
+    let per = 0;
+    let percentages = [];
+    acvs.forEach((acv)=> {
+      console.log("ACV ",acv);
+      console.log("total ACV",totalAcv);
+      per = (acv * 100)/ totalAcv;
+      percentages.push(per);
+
+    })
 
     result.push({
       name: custType,     
       values: acvs,
+      percentages,
+      totalCount,
+      totalAcv,
       quarter: quarters,
       count: counts,
     });
+    finalACV += totalCount;
   }
 
   return result;
