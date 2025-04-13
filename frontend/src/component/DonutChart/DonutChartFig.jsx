@@ -1,7 +1,7 @@
 import { DonutChart } from "./DonutChart";
 import { useState, useEffect } from "react";
 
-export const Chart2 = ({ width = 700, height = 400, data  }) => {
+export const DonutChartFig = ({ width = 700, height = 400, data  }) => {
 
   const [newData, setNewData] =  useState([]);
   useEffect(() => {

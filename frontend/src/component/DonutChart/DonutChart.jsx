@@ -1,6 +1,6 @@
 import { useMemo, useRef } from "react";
 import * as d3 from "d3";
-import * as styles from './style2.css';
+import * as styles from './style.css';
 
 const MARGIN_X = 150;
 const MARGIN_Y = 50;

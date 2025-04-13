@@ -1,34 +1,19 @@
-import { Histogram } from "./component/Histogram";
-import { Chart2 } from "./component/Chart2";
 import { useEffect, useState } from "react";
 import api from "./api";
-import CustomizedTables from "./component/CustomizaTable";
-import {
-  Card,
-  CardContent,
-  Box,
-  Grid,
-  Typography,
-  CircularProgress,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import { Dashboard } from "./component/Dashboard";
 
 function App() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMedium = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const [dataType, setDataType] = useState("");
 
   const fetchData = async (type = "") => {
     setLoading(true);
     try {
       const response = await api.get(`/data?type=${type}`);
       const responseData = response.data;
-
       if (responseData?.status === true && Array.isArray(responseData.data)) {
         setData(responseData.data);
       } else {
@@ -43,33 +28,8 @@ function App() {
   };
 
   useEffect(() => {
-    fetchData("TEAM");
-  }, []);
-
-  const getHistogramRatio = () => {
-    const width = isSmall ? 420 : isMedium ? 700 : 960;
-    const height = isSmall ? 250 : isMedium ? 310 : 460;
-    return { width, height };
-  };
-
-  const getChart2Ratio = () => {
-    const width = isSmall ? 360 : isMedium ? 470 : 520;
-    const height = isSmall ? 360 : isMedium ? 470 : 520;
-    return { width, height };
-  };
-
-  const histogram = getHistogramRatio();
-  const chart2 = getChart2Ratio();
-
-  const Header = () => {
-    return (
-      <Box sx={{display:'flex',justifyContent:'center'}}> 
-      <span>
-      Hello ACV Mix By Cust Type 
-      </span>
-      </Box>
-    )
-  }
+    fetchData(dataType);
+  }, [dataType]);
 
   return (
     <Box sx={{ p: 2 }}>
@@ -83,38 +43,7 @@ function App() {
           {error}
         </Typography>
       )}
-
-      <Card elevation={8} sx={{ borderRadius: 2 }}>
-        <CardContent>
-          <Header />
-          <Grid
-            container
-            spacing={2}
-            justifyContent="space-between"
-          >
-            <Grid item xs={12} md={8}>
-              <Box width="100%">
-                <Histogram
-                  newData={data}
-                  height={histogram.height}
-                  width={histogram.width}
-                />
-              </Box>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              md={4}
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <Chart2 data={data} height={chart2.height} width={chart2.width} />
-            </Grid>
-            <Grid item xs={12} style={{ width: "100%" }}>
-              <CustomizedTables data={data} />
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+      <Dashboard data={data} dataType={ dataType } setDataType={ setDataType } />
     </Box>
   );
 }
