@@ -1,11 +1,15 @@
 import { DonutChart } from "./DonutChart";
+import { useState, useEffect } from "react";
 
-const data = [
-    {name:"Mark", value: 70},
-    {name:"Robert", value: 30},
-]
+export const Chart2 = ({ width = 700, height = 400, data  }) => {
 
+  const [newData, setNewData] =  useState([]);
+  useEffect(() => {
+    const finalData = data.map((_data)=> {
+      return {name: _data.name,value:_data.totalAcv}
+    })
+    setNewData(finalData);
+  },[data])
 
-export const Chart2 = ({ width = 700, height = 400 }) => (
-  <DonutChart data={data} width={width} height={height} />
-);
+  return <DonutChart data={newData} width={width} height={height} />
+};

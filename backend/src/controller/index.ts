@@ -75,6 +75,7 @@ const makeDataFormat = (
     result.push({
       name: key,
       values: acvs,
+      quarters,
       counts: counts,
       percents,
       totalAcv,

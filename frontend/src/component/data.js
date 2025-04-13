@@ -49,8 +49,6 @@ export const getData = () => {
     let per = 0;
     let percentages = [];
     acvs.forEach((acv)=> {
-      console.log("ACV ",acv);
-      console.log("total ACV",totalAcv);
       per = (acv * 100)/ totalAcv;
       percentages.push(per);
 

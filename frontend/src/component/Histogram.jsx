@@ -1,16 +1,23 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 
 const MARGIN = { top: 30, right: 30, bottom: 40, left: 50 };
 const COLORS = ["#e0ac2b", "#e85252", "#6689c6", "#9a6fb0", "#a53253"];
 
-export const Histogram = ({ width, height, data }) => {
+export const Histogram = ({ width, height, newData }) => {
+
+  const [data,setData] = useState([])
   const axesRef = useRef(null);
   const boundsWidth = width - MARGIN.left - MARGIN.right;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
   // Get unique quarters
-  const allQuarters = data[0]?.quarter ?? [];
+  const allQuarters = data[0]?.quarters ?? [];
+
+  useEffect(()=> {
+    console.log("update new Data ",newData);
+    setData(newData);
+  },[newData])
 
   const xScale = useMemo(() => {
     return d3
