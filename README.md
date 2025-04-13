@@ -9,6 +9,10 @@ A simple SkyGeni Task setup with separate frontend and backend services.
 
 ---
 
+## Programming Language:
+- TypeScript/JavaScript for backend
+- ReactJS for Frontend (Functional Components)
+
 ## 🚀 Getting Started
 
 <h3>2. Start the Backend Server</h3>
