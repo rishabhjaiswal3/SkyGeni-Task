@@ -36,3 +36,9 @@ npm run dev
 </pre>
 
 <p>🟢 Frontend will run on <a href="http://localhost:5173" target="_blank">http://localhost:5173</a></p>
+
+![Screenshot from 2025-04-13 12-23-04](https://github.com/user-attachments/assets/e6d156f6-3801-4cf9-938c-f437c7d395dc)
+![Screenshot from 2025-04-13 12-23-15-1](https://github.com/user-attachments/assets/d1b9c7ed-b97d-471d-aeb0-32a2a01eda55)
+![Screenshot from 2025-04-13 12-23-25](https://github.com/user-attachments/assets/62eff2e8-41bf-4189-8abf-dbaa60187a4d)
+
+
