@@ -18,16 +18,19 @@ import {
     const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
     const isMedium = useMediaQuery(theme.breakpoints.between("sm", "md"));
   
+    // height - Width for histogram 
     const histogram = {
       width: isSmall ? 420 : isMedium ? 700 : 960,
       height: isSmall ? 250 : isMedium ? 310 : 460,
     };
-  
+
+    // height - width for donut
     const donut = {
       width: isSmall ? 360 : isMedium ? 470 : 520,
       height: isSmall ? 360 : isMedium ? 470 : 520,
     };
   
+
     return (
       <Card elevation={8} sx={{ borderRadius: 2 }}>
         <CardContent>
@@ -35,6 +38,7 @@ import {
           <Grid container spacing={2} justifyContent="space-between">
             <Grid item xs={12} md={8}>
               <Box width="100%">
+                {/* Histogram Diagram */}
                 <Histogram
                   newData={data}
                   height={histogram.height}
@@ -48,6 +52,7 @@ import {
               md={4}
               style={{ display: "flex", justifyContent: "center" }}
             >
+              {/* Donut Chart Figure  */}
               <DonutChartFig
                 data={data}
                 height={donut.height}
@@ -55,6 +60,7 @@ import {
               />
             </Grid>
             <Grid item xs={12} style={{width:"100%"}}>
+              {/* Table Figure */}
               <CustomizedTables data={data} />
             </Grid>
           </Grid>
